@@ -18,15 +18,17 @@ by 张鑫辉 2021214721
 
 ## 硬件基础试题
 
-[解答](./SCM/Readme.md)
+[解答](./Hardware/Readme.md)
 
 ## 单片机及控制试题
 
-[解答](./Programming/Readme.md)
+[解答](./SCM/Readme.md)
 
 ## 结构基础试题
 
 未做。
 
 [题目](./StructureModeling/StructureModelingQuestion.pdf)
+
+[附件目录](./StructureModeling/)
 
