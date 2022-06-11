@@ -2,7 +2,7 @@
 
 [题目](./HardwareQuestion.pdf)
 
-[附件：Forest_S1_STM32最小系统原理图](./附件：Forest_S1_ STM32最小系统原理图.pdf)
+[附件：Forest_S1_STM32最小系统原理图](./Forest_S1_ STM32.pdf)
 
 ---
 
