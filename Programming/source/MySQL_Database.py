@@ -1,3 +1,6 @@
+"""
+使用MySQL数据库存储数据。
+"""
 import pymysql
 
 
@@ -102,13 +105,17 @@ class Database:
         self.cur.execute(self.__cmd)
         return list(self.cur.fetchall())
 
-    def get_all_data(self):
+    def get_all_data(self, order=False, field=None, way='ASC'):
         """
         获取全部数据
         :return: 全部数据的列表
         """
-        self.__cmd = """select * from students;
-        """
+        if order:
+            self.__cmd = """select * from students order by {0} {1};
+            """.format(field, way)
+        else:
+            self.__cmd = """select * from students;
+            """
         self.cur.execute(self.__cmd)
         return list(self.cur.fetchall())
 
@@ -153,3 +160,6 @@ class Database:
         except Exception as e:
             print('[Database] Error:')
             print(e)
+
+    def close(self):
+        self.db.close()

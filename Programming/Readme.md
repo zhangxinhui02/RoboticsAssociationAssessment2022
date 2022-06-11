@@ -120,7 +120,7 @@
    >          fun();
    >          return 0;
    >      }
-   >                  
+   >                     
    >      /*****a.c*****/
    >      int num = 1;
    >      void fun(){
@@ -168,8 +168,15 @@
    > 使用Python完成了`Students Data Manage System`，源码位于[source](./source/)文件夹。
    >
    > - `main.py`是主程序。
-   > - `Database.py`是封装了MySQL操作的数据库模块。
+   > - `MySQL_Database.py`是封装了MySQL操作的数据库模块。
+   > - `Pydict_Database.py`是使用Python原生的字典及`yaml`文件存储数据的数据库模块。
    >
    > 使用MySQL数据库保存成员信息，故运行之前需要配置MySQL数据库。
    >
-   > 完成了增删改查等操作。
+   > 完成了增删改查排序等操作。
+   >
+   > 
+   >
+   > 补充：有两个数据库模块的原因是，我首先写完的是调用MySQL存储的模块。后来考虑到数据存储也可能是考核的考点，因此又写了一个本地`yaml`存储数据的模块，存储逻辑全部自行完成。
+   >
+   > 封装接口与MySQL_Database模块几乎完全一致，简单修改引入的模块名即可使用。

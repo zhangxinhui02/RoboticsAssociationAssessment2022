@@ -1,19 +1,40 @@
 #!/usr/bin/python3
-from Database import Database
+from MySQL_Database import Database
+# from Pydict_Database import Database
 
-# 填写数据库基本信息
+# 使用MySQL_Database模块前需要填写MySQL数据库基本信息。
+# 如果使用PyDict_Database则无需填写。
 database_host = "127.0.0.1"
 database_user = ""
 database_password = ""
 database_port = 3306
 database_name = "StudentsData"
 
+# 使用PyDict_Database模块前需要指定yaml文件的路径。
+# 如果使用MySQL_Database则无需填写。
+yaml_path = "./data.yaml"
+
 
 def show_all():
-    all_data_list = db.get_all_data()
+    field = ''
+    way = ''
     print('\n[Manager] Information of all students:')
+    order = input('\tOrder the list? [Y/N]: ')
+    if order in 'Yy' and order != '':
+        order = True
+    else:
+        order = False
+    if order:
+        field = input('\tInput which label to order [id, name, sex, school, major, grade]: ')
+        way = input('\tChoose how to order (1 for ASC, 2 for DESC): ')
+        if way == '2':
+            way = 'DESC'
+        else:
+            way = 'ASC'
+
+    all_data_list = db.get_all_data(order, field, way)
     print('[Manager] (Sex 1 for Male, 2 for Female)')
-    print('\tID\tName\tSex\tSchool\tMajor\tGrade')
+    print('\tID\t\tName\t\tSex\tSchool\t\t\tMajor\t\t\tGrade')
     for i in all_data_list:
         print('\t{0}\t{1}\t\t{2}\t{3}\t{4}\t{5}'.format(i[0], i[1], i[2], i[3], i[4], i[5]))
     cmd = input('\nPress Enter...')
@@ -75,7 +96,7 @@ def search():
     label = input('\tInput which label to search [id, name, sex, school, major, grade]: ')
     obj = input('\tInput the value for search: ')
     order = input('\tOrder the list? [Y/N]: ')
-    if order in 'Yy':
+    if order in 'Yy' and order != '':
         order = True
     else:
         order = False
@@ -87,7 +108,7 @@ def search():
         else:
             way = 'ASC'
     data_list = db.get_data(label, obj, order, field, way)
-    print('\tID\tName\tSex\tSchool\tMajor\tGrade')
+    print('\tID\t\tName\t\tSex\tSchool\t\t\tMajor\t\t\tGrade')
     for i in data_list:
         print('\t{0}\t{1}\t\t{2}\t{3}\t{4}\t{5}'.format(i[0], i[1], i[2], i[3], i[4], i[5]))
     cmd = input('\nPress Enter...')
@@ -114,6 +135,7 @@ def menu():
         search()
     elif cmd == '6':
         print('[Manager] Bye')
+        db.close()
         exit(0)
 
 
@@ -123,11 +145,17 @@ if __name__ == '__main__':
     print('GitHub: https://github.com/zhangxinhui02/RoboticsAssociationAssessment2022\n')
 
     print('[Manager] Connecting to database...')
+
+    # 适用于MySQL_Database模块
     db = Database(database_host,
                   database_user,
                   database_password,
                   database_name,
                   database_port)
+
+    # 适用于MySQL_Database模块
+    # db = Database(yaml_path)
+
     if db.available is not True:
         print('[Manager] Database is not available!')
         exit(0)
